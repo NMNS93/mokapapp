@@ -3,7 +3,7 @@ import json
 import itertools
 from mokapapp.db import MokaDB, MokaPanelChecker, _MokaPanelActivator, MokaPanelUpdater
 from mokapapp.lib import MokaPanel
-from auth import SV_TE_MOKDBS01
+from auth import MOKADB
 from mocks import mock_json
 
 import logging
@@ -13,7 +13,7 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 @pytest.fixture()
 def mdb():
-    return MokaDB(**SV_TE_MOKDBS01)
+    return MokaDB(**MOKADB)
 
 @pytest.fixture(scope="function")
 def activator(mdb):
@@ -34,7 +34,7 @@ def false_mp():
 class TestMokaDBChecker:
     @pytest.fixture(scope="module")
     def mc(mdb):
-        return MokaPanelChecker(**SV_TE_MOKDBS01)
+        return MokaPanelChecker(**MOKADB)
     
     def test_hashes(self, mc, mock_mp, false_mp):
         """Test that old hashes are ignored and new hashes are returned by
@@ -84,7 +84,7 @@ class TestMokaPanelActivator():
 def test_moka_updater(mock_mp):
     """ To test MokaPanelUpdater, we insert the mock panel into Moka and assert all other
     test functions work against this inserted panel."""
-    mpu = MokaPanelUpdater(**SV_TE_MOKDBS01)
+    mpu = MokaPanelUpdater(**MOKADB)
     mpu.insert_into_moka(mock_mp)
     assert mpu.in_ngs_panel(mock_mp.hash) == True
     assert mpu.version_in_ngs_panel(mock_mp.hash, mock_mp.version) == True
