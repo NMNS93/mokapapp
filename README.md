@@ -1,6 +1,6 @@
 # Moka Panel App (mokapapp)
 
-![MokaPapp Logo](_assets/mokapapp.png)
+![MokaPapp Logo](_assets/mkp.png)
 
 `mokapapp` imports [Panel App](https://www.genomicsengland.co.uk/about-genomics-england/panelapp/) panels into the Viapath Genetics LIMS system (Moka).
 
